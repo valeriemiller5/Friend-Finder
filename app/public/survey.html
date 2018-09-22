@@ -8,20 +8,38 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
     <title>Friend Finder</title>
-<style>
-    .error {
-      color: red;
-      font-weight: bold;
-    }
+
+    <style>
     .form-control-lg {
         width: 200px;
     }
-</style>
+    #myModal {
+        width: 850px;
+        height: 500px;
+    }
+    </style>
 
 </head>
 <body>
+    <div class="modal fade" id="myModal">  
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="title">Meet Your New Friend!</h1>
+                </div>
+                <div class="modal-body">
+                    <h2 id="friendName"></h2>
+                    <img id="friendPhoto" class="photo" width="300" src="">
+                </div>
+                <div class="modal-footer">
+                    <a href="/survey" class="modal-action modal-close btn-flat">Take the survey again!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="container">
         <form class="form">
             <h1>Survey Questions</h1>
@@ -173,59 +191,66 @@
         </form>
         <hr>
     </div>
-    <div id="fade"></div>
     <footer class="footer">
         <div class="container">
             <p>
-                <a href="/api/friends">API Friends List</a> | <a href="https://github.com/afhaque/friendfinder">GitHub Repo</a>
+                <a href="/api/friends">API Friends List</a> | <a href="https://github.com/valeriemiller5/Friend-Finder">GitHub Repo</a>
             </p>
         </div>
     </footer>
 </body>
     
     <script type="text/javascript">
-        $(".submit").on("click", function(event) {
-            event.preventDefault();
-            var newFriends = {
-                name: $("#nameEntry").val().trim(),
-                photo: $("#photoEntry").val().trim(),
-                scores: [
-                    $("#questionOne").val(),
-                    $("#questionTwo").val(),
-                    $("#questionThree").val(),
-                    $("#questionFour").val(),
-                    $("#questionFive").val(),
-                    $("#questionSix").val(),
-                    $("#questionSeven").val(),
-                    $("#questionEight").val(),
-                    $("#questionNine").val(),
-                    $("#questionTen").val()
-                ]
-            };
+        $(document).ready(function() {
 
-            console.log(newFriends);
- 
-            for(var i = 0; i < newFriends.scores.length; i++) {
-                console.log(newFriends[i]);
-            }
+            $(".submit").on("click", function(event) {
+                event.preventDefault();
+                var newFriends = {
+                    name: $("#nameEntry").val().trim(),
+                    photo: $("#photoEntry").val().trim(),
+                    scores: [
+                        $("#questionOne").val(),
+                        $("#questionTwo").val(),
+                        $("#questionThree").val(),
+                        $("#questionFour").val(),
+                        $("#questionFive").val(),
+                        $("#questionSix").val(),
+                        $("#questionSeven").val(),
+                        $("#questionEight").val(),
+                        $("#questionNine").val(),
+                        $("#questionTen").val()
+                    ]
+                };
 
-            if (newFriends.scores[i] === 0 || newFriends.name.length < 1 || newFriends.photo.length < 1) {
-                alert("Please make sure all fields are completed.");
-                $(window).scrollTop(0);            
-            }
-            
-            if (newFriends.name.length > 1 && newFriends.photo.length > 1 && newFriends.scores[i] !== 0) {
-                $("#fade").modal({
-                    fadeDuration: 1000,
-                    fadeDelay: 1.75
-                });
-                $("#fade").append("<h2>This is your closest match!</h2>" + "<hr>" + "<h4>This is where the friend info goes.</h4>");
-                $.post("/api/friends", newFriends, function(data) {
-                    console.log("Friend info posted.");
-                });
-            };
+                console.log(newFriends);
 
-        });
+                
+    
+                for(var i = 0; i < newFriends.scores.length; i++) {
+                    console.log(newFriends.scores[i]);
+                }
+
+                if (newFriends.scores[i] === 0 || newFriends.name.length < 1 || newFriends.photo.length < 1) {
+                    alert("Please make sure all fields are completed.");
+                    $(window).scrollTop(0); //scrolls back to the top of the page to check that all fields have a value entered           
+                }
+                
+                if (newFriends.name.length > 1 && newFriends.photo.length > 1 && newFriends.scores[i] !== 0) {
+                    //this is the jQuery/Bootstrap modal
+                    $("#myModal").modal({
+                        fadeDuration: 1000,
+                        fadeDelay: 0.50
+                    })
+                    $.post("/api/friends", newFriends, function(data) {
+                        console.log("Friend info posted.");
+                        $("#friendName").html(data.friendName);
+                        $("#friendPhoto").attr("src", data.friendPhoto);
+                    });
+                };
+
+            });
+        })
+        
     </script>
 
 </html>
