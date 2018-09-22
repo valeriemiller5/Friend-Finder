@@ -15,30 +15,36 @@
     .form-control-lg {
         width: 200px;
     }
-    #myModal {
+    #myModal, .modal {
         width: 850px;
-        height: 500px;
+        margin-top: 150px;
+        margin-left: 250px;
+    }
+    #title {
+        text-align: center;
     }
     </style>
 
 </head>
 <body>
-    <div class="modal fade" id="myModal">  
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title" id="title">Meet Your New Friend!</h1>
-                </div>
-                <div class="modal-body">
-                    <h2 id="friendName"></h2>
-                    <img id="friendPhoto" class="photo" width="300" src="">
-                </div>
-                <div class="modal-footer">
-                    <a href="/survey" class="modal-action modal-close btn-flat">Take the survey again!</a>
-                </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="header">Meet Your New Friend!</div>
+              <br>
+              <br>
+              <h3 id="title">Meet Your New Friend!</h3>
+              <h4 id="friendName"></h4>
+              <img id="friendPhoto" width="200" src="">
             </div>
+            <div class="modal-footer">
+                <a href="/survey" class="modal-action modal-close btn-flat">Take the survey again!</a>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
     
     <div class="container">
         <form class="form">
@@ -239,7 +245,9 @@
                     //this is the jQuery/Bootstrap modal
                     $("#myModal").modal({
                         fadeDuration: 1000,
-                        fadeDelay: 0.50
+                        fadeDelay: 0.50,
+                        // startingTop: "4%",
+                        // endingTop: "10%"
                     })
                     $.post("/api/friends", newFriends, function(data) {
                         console.log("Friend info posted.");
@@ -252,5 +260,4 @@
         })
         
     </script>
-
 </html>

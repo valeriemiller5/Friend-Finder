@@ -16,7 +16,7 @@ module.exports = function(app) {
 
 //will display information from the array "friends"
     app.post("/api/friends", function(req,res){
-        console.log("req.body: " +  req.body);
+        //console.log("req.body: " +  req.body);
         var friendInfo = req.body.scores;
         var friendName = "";
         var friendPhoto = "";
@@ -33,7 +33,7 @@ module.exports = function(app) {
             console.log("compare: " + compare);
 
             if(compare <= friendScore) {
-                console.log("match is: " + compare + " " + friends[i].name);
+                console.log("match is: " + friends[i].name);
 
                 friendScore = compare;
                 friendName = friends[i].name;

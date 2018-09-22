@@ -2,35 +2,51 @@
 //currenty has a "dummy" friend to test the code
 var friends = [
     {
-        name: "Bob",
-        photo: "https://vignette.wikia.nocookie.net/king-harkinian/images/4/47/Spongebob.png/revision/latest/scale-to-width-down/1000?cb=20170518185222",
+        name: "Blossom",
+        photo: "https://vignette.wikia.nocookie.net/powerpuff/images/2/23/Blossom-pic.png/revision/latest?cb=20130517081824",
         scores: [
             "5",
-            "2",
-            "2",
             "1",
-            "3",
-            "4",
+            "1",
             "5",
+            "5",
+            "4",
             "1",
+            "2",
             "3",
-            "2"
+            "3"
         ]
     },
     {
-        name: "Garfield",
-        photo: "https://vignette.wikia.nocookie.net/garfield/images/4/43/Garfield_the_Cat.png/revision/latest?cb=20150508141623",
+        name: "Bubbles",
+        photo: "https://vignette.wikia.nocookie.net/blossom/images/6/66/BUBBLES_PPG.png/revision/latest?cb=20120914202027",
         scores: [
-            "4",
-            "5",
-            "1",
+            "3",
             "2",
+            "2",
+            "4",
+            "1",
             "3",
             "1",
-            "5",
+            "3",
+            "2",
+            "1"
+        ]
+    },
+    {
+        name: "Buttercup",
+        photo: "https://vignette.wikia.nocookie.net/characters/images/d/d2/Buttercup_%28The_Powerpuff_Girls_2016%29.png/revision/latest?cb=20171005170632",
+        scores: [
+            "1",
             "4",
             "4",
-            "2"
+            "2",
+            "3",
+            "2",
+            "3",
+            "4",
+            "2",
+            "5"
         ]
     }
 ];
