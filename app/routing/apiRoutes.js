@@ -2,7 +2,7 @@
 //  Dependencies
 //=============================================================
 //require the friendsData.js file to access friends information
-var friendsData = require("../app/data/friendsData");
+var friendsData = require("../data/friendsData");
 
 //=============================================================
 //  Routing
@@ -16,6 +16,7 @@ module.exports = function(app) {
 
 //will display information from the array "friends"
     app.post("/api/friends", function(req,res){
+        console.log(JSON.stringify(req.body))
         friendsData.push(req.body);
         res.json(true);
     });

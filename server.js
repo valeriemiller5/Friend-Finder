@@ -18,8 +18,8 @@ app.use(bodyParser.json());
 //  Routing
 //=============================================================
 //connects server to the apiRoutes.js and htmlRoutes.js files
-require("./routing/apiRoutes")(app);
-require("./routing/htmlRoutes")(app);
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
 //=============================================================
 //listener, will start up the server
